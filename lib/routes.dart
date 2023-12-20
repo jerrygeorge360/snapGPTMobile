@@ -13,7 +13,7 @@ getRoutes(){
     '/settings':(context)=>const SettingsPage(),
     '/home':(context)=>const HomePage(),
     '/history':(context)=>HistoryPage(),
-    '/test':(context)=>const Weka(),
+    '/test':(context)=>Weka(),
     '/login':(context)=>const Login(),
     // '/modal':(context)=>const ProfileModal
   };
