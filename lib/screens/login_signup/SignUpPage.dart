@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../services/constantvalues.dart';
 import '../../services/hex_converter.dart';
+import '../../services/login_signup/login_signup.dart';
 
 class SignUp extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+
       body: SafeArea(
         child: Column(
           children: [
@@ -72,92 +77,10 @@ class SignUp extends StatelessWidget {
             Divider(height: 30,),
 
 
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 270,
-                      height: 70,
-                      child:TextFormField(
-                        onChanged: (value){
-                          // provider.getLoginName(value);
-                        },
-                        validator: (value){
-                          if(value!.isEmpty){
-                            // return provider.LogMessage;
-                          }
-                          return null;
-                        },
-
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: convert_hex('#FFFFFF'),
-                            hintText: 'Email Address',
-                            labelText: 'Email Address',
-                            border:InputBorder.none
-                        ),
-                      ) ,
-                    ),
-                    Container(
-                      width: 270,
-                      height: 70,
-                      child:TextFormField(
-                        onChanged: (value){
-                          // provider.getLoginName(value);
-                        },
-                        validator: (value){
-                          if(value!.isEmpty){
-                            // return provider.LogMessage;
-                          }
-                          return null;
-                        },
-
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: convert_hex('#FFFFFF'),
-                            hintText: 'Username',
-                            labelText: 'username',
-                            border: InputBorder.none
-                        ),
-                      ) ,
-                    ),
-                    Container(
-                      width: 270,
-                      height: 70,
-                      child:TextFormField(
-                        onChanged: (value){
-                          // provider.getLoginName(value);
-                        },
-                        validator: (value){
-                          if(value!.isEmpty){
-                            // return provider.LogMessage;
-                          }
-                          return null;
-                        },
-
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: convert_hex('#FFFFFF'),
-                            hintText: 'Password',
-                            labelText: 'Password',
-                            border: InputBorder.none
-                        ),
-                      ) ,
-                    ),
-                    SizedBox(height: 20,),
-                    Container(
-                      width: 270,
-                      height: 43,
-                      child:  ElevatedButton(onPressed: ()=>{}, child: Text('Sign Up'),style:ElevatedButton.styleFrom(
-                          primary: convert_hex('#369478')
-                      ),),
-                    )
-
-                  ],
-                ),
+               SignUpForm()
 
 
               ],
@@ -170,3 +93,141 @@ class SignUp extends StatelessWidget {
     );
   }
 }
+
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({super.key});
+
+  @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  final _formkey=GlobalKey<FormState>();
+  late String _email;
+  late String _username;
+  late String _password;
+  late Map<String,dynamic> _data;
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formkey,
+
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: (){
+          setState(() {
+            Form.of(primaryFocus!.context!)!.save();
+          });
+        },
+        child:Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 270,
+              height: 70,
+              child:TextFormField(
+                onSaved: (value){
+                      if(value !=null){
+                        _email=value;
+                      }
+                },
+                validator: (value){
+                  validateForm(value);
+                },
+
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: convert_hex('#FFFFFF'),
+                    hintText: 'Email Address',
+                    labelText: 'Email Address',
+                    border:InputBorder.none
+                ),
+              ) ,
+            ),
+            Container(
+              width: 270,
+              height: 70,
+              child:TextFormField(
+                onSaved: (value){
+                  if(value != null){
+                          _username=value;
+                  }
+                },
+                validator: (value){
+                  validateForm(value);
+                },
+
+
+
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: convert_hex('#FFFFFF'),
+                    hintText: 'Username',
+                    labelText: 'username',
+                    border: InputBorder.none
+                ),
+              ) ,
+            ),
+            Container(
+              width: 270,
+              height: 70,
+              child:TextFormField(
+                onSaved: (value){
+                  if(value !=null){
+                    _password=value;
+                  }
+
+                },
+                validator: (value){
+                  validateForm(value);
+                },
+
+                decoration: InputDecoration(
+                    filled: true,
+                    fillColor: convert_hex('#FFFFFF'),
+                    hintText: 'Password',
+                    labelText: 'Password',
+                    border: InputBorder.none
+                ),
+              ) ,
+            ),
+            SizedBox(height: 20,),
+            Container(
+              width: 270,
+              height: 43,
+              child:  ElevatedButton(
+
+               child: Text('Sign Up'),style:ElevatedButton.styleFrom(
+                  primary: convert_hex('#369478')
+              ), onPressed: () {
+
+                if(_formkey.currentState!.validate()){
+                  //write to send to server.
+                  _data={'user_name':_username,'password':_password,'email':_email};
+                  dynamic res=sendFormData('{$urll}signup', _data);
+                  _username='';
+                  _password='';
+                  _email='';
+                  if(res['success']==true){
+                    Navigator.of(context).pushNamed('/home');
+                  }
+                  else{
+                    String error=res['message'];
+                    //do an error widget here
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(error))
+                    );
+
+
+                  }
+                  //TODO: navigate
+                }
+              },),
+            )
+
+          ],
+        )
+
+    );
+  }
+}
+
