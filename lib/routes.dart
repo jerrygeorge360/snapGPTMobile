@@ -6,6 +6,7 @@ import 'package:snap_gpt/screens/home_page/chats.dart';
 import 'package:snap_gpt/screens/home_page/homepage.dart';
 import 'package:snap_gpt/screens/home_page/typingWid.dart';
 import 'package:snap_gpt/screens/login_signup/LoginPage.dart';
+import 'package:snap_gpt/screens/login_signup/SignUpPage.dart';
 import 'package:snap_gpt/screens/picture_page/components.dart';
 import 'package:snap_gpt/screens/settings/setting_page.dart';
 import 'package:snap_gpt/screens/welcome_page/welcome_page.dart';
@@ -18,6 +19,7 @@ getRoutes(){
     '/history':(context)=>HistoryPage(),
     '/test':(context)=>MyApp(),
     '/login':(context)=>const Login(),
+    '/signup':(context)=>SignUp()
     // '/modal':(context)=>const ProfileModal
   };
 

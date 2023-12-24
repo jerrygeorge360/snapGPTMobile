@@ -17,12 +17,13 @@ class _PicProcessingState extends State<PicProcessing> {
 
   final _formkey = GlobalKey<FormState>();
   late final PicCam _picList;
-  late final String _additionalPrompt;
+  late String _additionalPrompt='';
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _picList=widget.picList;
+
   }
 
   @override
@@ -64,12 +65,12 @@ class _PicProcessingState extends State<PicProcessing> {
 
                 onSaved: (value){
                   if(value != null){
-                      _additionalPrompt=value;
+                    _additionalPrompt=value;
                   }
                   if(value==null){
                     _additionalPrompt='answer this';
-
                   }
+
                 },
 
 

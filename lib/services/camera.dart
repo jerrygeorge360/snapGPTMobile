@@ -42,7 +42,7 @@ Future<Map<String,dynamic>> sendImageData(String route,Map<String,dynamic>data)a
       return requestDecoded;
     }
     else{
-      throw Exception('failed to send request. Status cod: ${request.body}');
+      throw Exception('failed to send request. Status code: ${request.body}');
     }
   }
   catch(e){

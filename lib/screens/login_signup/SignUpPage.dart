@@ -17,11 +17,9 @@ class SignUp extends StatelessWidget {
           children: [
             Row(mainAxisAlignment:MainAxisAlignment.end,
               children: [
-                Text('Sign in',style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Lato'
-                ),)
+                TextButton(onPressed: () { Navigator.of(context).pushNamed('/login'); },
+                child: Text('Sign In',style: TextStyle(color:convert_hex('#369478'),fontSize: 20,fontFamily: 'Lato',fontWeight: FontWeight.w600),),
+                  )
               ],),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -12,88 +12,94 @@ class Login extends StatelessWidget {
     return Scaffold(
 
       body: SafeArea(
-        child: Column(
-          children: [
-            Row(mainAxisAlignment:MainAxisAlignment.end,
-                children: [
-              Text('Sign Up',style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Lato'
-              ),)
-            ],),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                Column(
-                  children: [
-                    SizedBox(height: 120,),
-                    Container(
-                      // color: Colors.red,
-                      width: 400,
-                      height: 140,
-                      decoration: const BoxDecoration(
-
-                          image: DecorationImage(
-
-                              image: AssetImage('assets/images/welcomescreen.png'),fit: BoxFit.cover
-
-                          )
-                      ),
-                    ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text('SnapGPT',style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.w800,
-                          fontFamily: 'Lato'
-                      ),)],),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 20,),
-            Row(mainAxisAlignment: MainAxisAlignment.center,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              Text('Welcome Back!',style: TextStyle(
-                fontFamily: 'Lato',
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: convert_hex('#369478')
-              ),)
-            ],),
-            SizedBox(height: 36,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 270,
-                  height: 46,
-                  color: Colors.white,
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [SizedBox(width: 20,),Icon(Icons.facebook),SizedBox(width: 20,),Text('Continue with Google',style:TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Lato',
-                      fontSize: 16,
-                      color: convert_hex('#6D6A6A')
-                    ))],
+              Row(mainAxisAlignment:MainAxisAlignment.end,
+                  children: [
+
+                TextButton(onPressed: (){
+                  Navigator.of(context).pushNamed('/signup');
+                }, child: Text('Sign Up',style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Lato',
+                  color: convert_hex('#369478')
+                ),),)
+              ],),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+
+                  Column(
+                    children: [
+                      SizedBox(height: 120,),
+                      Container(
+                        // color: Colors.red,
+                        width: 400,
+                        height: 140,
+                        decoration: const BoxDecoration(
+
+                            image: DecorationImage(
+
+                                image: AssetImage('assets/images/welcomescreen.png'),fit: BoxFit.cover
+
+                            )
+                        ),
+                      ),
+                      Row(mainAxisAlignment: MainAxisAlignment.center,
+                        children: [Text('SnapGPT',style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: 'Lato'
+                        ),)],),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            Divider(height: 30,),
-
-
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+                ],
+              ),
+              SizedBox(height: 20,),
+              Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              LoginForm()
-              ],
-            ),
+                Text('Welcome Back!',style: TextStyle(
+                  fontFamily: 'Lato',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: convert_hex('#369478')
+                ),)
+              ],),
+              SizedBox(height: 36,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 270,
+                    height: 46,
+                    color: Colors.white,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [SizedBox(width: 20,),Icon(Icons.facebook),SizedBox(width: 20,),Text('Continue with Google',style:TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Lato',
+                        fontSize: 16,
+                        color: convert_hex('#6D6A6A')
+                      ))],
+                    ),
+                  ),
+                ],
+              ),
+              Divider(height: 30,),
 
-            // ElevatedButton(onPressed:(), child: Text())
-          ],
+
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                LoginForm()
+                ],
+              ),
+
+              // ElevatedButton(onPressed:(), child: Text())
+            ],
+          ),
         ),
       ),
     );
