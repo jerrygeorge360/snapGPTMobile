@@ -3,7 +3,8 @@ import 'package:snap_gpt/routes.dart';
 
 void main(){
   runApp(MaterialApp(
-          initialRoute: '/welcomeScreen',
+
+          initialRoute: '/home',
           routes: getRoutes(),
   ));
 }
